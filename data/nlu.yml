@@ -1,0 +1,208 @@
+version: "3.1"
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+    - Hi
+- intent: goodbye
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+    - nothing
+    - cancel
+    - cancel my order
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+- intent: place_order
+  examples: |
+    - i want to place an order
+    - order please
+    - can you take my order?
+    - I want to make an order
+    - Could you please take this order?
+    - can i make order here?
+    - I want to place an order
+- intent: inform_order_pizza
+  examples: |
+    - i want to order a pizza
+    - i want to order pizza
+    - order pizza
+    - pizza please
+    - pizza
+    - take my order for pizza
+    - can i order pizza?
+    - Could you please take my order for pizza?
+- intent: inform_size
+  examples: |
+    - i would like to have [medium](pizza_size) size pizza.
+    - [small](pizza_size)
+    - [large](pizza_size) please
+    - i want [regular](pizza_size) pizza
+    - make it [small](pizza_size)
+    - [large](pizza_size) size
+    - I want [regular](pizza_size) pizza
+- intent: inform_crust
+  examples: |
+    - i want [thin](pizza_crust) crust.
+    - [stuffed](pizza_crust) please
+    - can i have [cheesey](pizza_crust) please?
+    - i guess [thin](pizza_crust) crust
+    - [cheesey](pizza_crust)
+    - [stuffed](pizza_crust) crust
+    - [thin](pizza_crust) crust
+- intent: inform_toppings
+  examples: |
+    - i want [veggies](pizza_topping).
+    - can i have [chicken tikka](pizza_topping)
+    - [chicken sausage](pizza_topping)
+    - [veggies](pizza_topping)
+    - i think [chicken tikka](pizza_topping)
+    - [chicken tikka](pizza_topping) please
+    - i would like to have [chicken tikka](pizza_topping)
+- intent: inform_cheese
+  examples: |
+    - i want [mozarella](pizza_cheese) cheese.
+    - [shredded](pizza_cheese)
+    - [gauda](pizza_cheese) please
+    - make it [shredded](pizza_cheese)
+    - can i have [mozarella](pizza_cheese) cheese
+    - [gauda](pizza_cheese) cheese
+- intent: inform_sause
+  examples: |
+    - i want [hot](pizza_sause) sause
+    - [peri peri](pizza_sause) sause please
+    - [pesto](pizza_sause) sause i guess
+    - make it [peri peri](pizza_sause) sause
+    - can i have [pesto](pizza_sause) sause please.
+    - [hot](pizza_sause)
+    - [pesto](pizza_sause)
+    - [peri peri](pizza_sause) sause
+- intent: inform_order_pasta
+  examples: |
+    - i want to order a pasta
+    - i want to order pasta
+    - order pasta
+    - pasta
+    - please order pasta
+    - can you please order a pasta
+    - could you please take my order for pasta
+    - take my order for pasta
+    - order pasta please
+    - pasta please
+- intent: inform_pasta_type
+  examples: |
+    - i would like to have [green](pasta_type).
+    - make it [white](pasta_type).
+    - [red](pasta_type) please
+    - [white](pasta_type) pasta.
+    - please add [red](pasta_type)
+    - [green](pasta_type)
+    - [red](pasta_type)
+    - i want [white](pasta_type)
+    - i want [white](pasta_type) pasta
+    - [White](pasta_type) pasta please
+- intent: inform_pasta_bread
+  examples: |
+    - i want [wheat](pasta_bread) bread please
+    - [garlic](pasta_bread) bread please
+    - [brown](pasta_bread) bread
+    - i guess [garlic](pasta_bread) bread
+    - get me [wheat](pasta_bread) bread
+    - make it [brown](pasta_bread) bread.
+- intent: inform_pasta_chilli
+  examples: |
+    - i want [spicy](pasta_chilli) pasta.
+    - [normal](pasta_chilli) please
+    - can you make it [spicy](pasta_chilli)
+    - please make it [normal](pasta_chilli)
+    - make it [spicy](pasta_chilli)
+    - [spicy](pasta_chilli) please
+    - [spicy](pasta_chilli)
+- intent: inform_order_icecream
+  examples: |
+    - i want to order an icecream
+    - i want to order ice cream
+    - order ice cream
+    - order icecream
+    - i want to order icecream
+    - take my order for icecream
+    - icecream please
+    - ice cream
+- intent: inform_icecream_cup_cone
+  examples: |
+    - i want [cup](cup_cone)
+    - i would like to have [cone](cup_cone)
+    - i want my ice cream in [cup](cup_cone)
+    - [cone](cup_cone) please.
+    - can you give iccream in [cup](cup_cone)
+    - i want it in [cone](cup_cone) please
+    - i want icecream in [cup](cup_cone)
+    - i want it in [cone](cup_cone)
+- intent: inform_icecream_flavour
+  examples: |
+    - i want [chocolate](icecream_flavour) icecream
+    - [vanilla](icecream_flavour) icecream please
+    - [butterscotch](icecream_flavour)
+    - i would like to have [chocolate](icecream_flavour) icecream
+    - i want [strawberry](icecream_flavour) icecream
+    - [strawberry](icecream_flavour) ice cream please
+    - [chocolate](icecream_flavour) icecream
+    - [butterscotch](icecream_flavour) please
+- intent: inform_icecream_scoop
+  examples: |
+    - i want [single](icecream_scoop) scoop
+    - i would like to have [double](icecream_scoop) scoop
+    - [triple](icecream_scoop) scoop please
+    - [single](icecream_scoop)
+    - [double](icecream_scoop) scoop
+    - [triple](icecream_scoop) scoop i guess
+    - [single](icecream_scoop) scoop please
+- intent: inform_icecream_topping
+  examples: |
+    - i want [chocochips](icecream_topping)
+    - i would like to have [oreo](icecream_topping) topping
+    - i will have [sprinkler](icecream_topping)
+    - [chocochips](icecream_topping)
+    - [sprinker](icecream_topping) please
+    - [oreo](icecream_topping) topping

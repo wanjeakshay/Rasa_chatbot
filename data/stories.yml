@@ -1,0 +1,319 @@
+version: "3.1"
+
+stories:
+
+- story: happy path
+  steps:
+  - intent: greet
+  - action: utter_ask_help
+
+- story: place order path
+  steps:
+  - intent: place_order
+  - action: utter_place_order
+
+- story: confirm pizza acceptance path 1
+  steps:
+  - action: utter_order_confirm
+  - intent: affirm
+  - action: utter_confirm_thanks
+  - action: action_reset_all_slots
+  - action: utter_anythingelse
+  - intent: affirm
+  - action: utter_ask_help
+
+- story: confirm pizza acceptance path 2
+  steps:
+  - action: utter_order_confirm
+  - intent: affirm
+  - action: utter_confirm_thanks
+  - action: action_reset_all_slots
+  - action: utter_anythingelse
+  - intent: deny
+  - action: utter_goodbye
+
+- story: confirm pizza acceptance with OR path 3
+  steps:
+  - action: utter_order_confirm
+  - intent: affirm
+  - action: utter_confirm_thanks
+  - action: action_reset_all_slots
+  - action: utter_anythingelse
+  - or:
+    - intent: place_order
+    - intent: inform_order_pizza
+    - intent: inform_order_pasta
+    - intent: inform_order_icecream
+
+- story: confirm pizza denial path 1
+  steps:
+  - action: utter_order_confirm
+  - intent: deny
+  - action: utter_order_cancel
+  - action: action_reset_all_slots
+  - action: utter_anythingelse
+  - intent: affirm
+  - action: utter_ask_help
+
+- story: confirm pizza denial path 2
+  steps:
+  - action: utter_order_confirm
+  - intent: deny
+  - action: utter_order_cancel
+  - action: action_reset_all_slots
+  - action: utter_anythingelse
+  - intent: deny
+  - action: utter_goodbye
+
+- story: interactive_story_1
+  steps:
+  - intent: greet
+  - action: utter_ask_help
+  - intent: place_order
+  - action: utter_place_order
+  - intent: inform_order_pizza
+  - action: order_pizza_form
+  - active_loop: order_pizza_form
+  - slot_was_set:
+    - requested_slot: pizza_size
+  - slot_was_set:
+    - pizza_size: large
+  - slot_was_set:
+    - requested_slot: pizza_crust
+  - slot_was_set:
+    - pizza_crust: stuffed
+  - slot_was_set:
+    - requested_slot: pizza_topping
+  - slot_was_set:
+    - pizza_topping: chicken tikka
+  - slot_was_set:
+    - requested_slot: pizza_cheese
+  - slot_was_set:
+    - pizza_cheese: shredded
+  - slot_was_set:
+    - requested_slot: pizza_sause
+  - slot_was_set:
+    - pizza_sause: pesto
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_pizza_details
+  - action: utter_order_confirm
+  - intent: deny
+  - action: utter_order_cancel
+  - action: action_reset_all_slots
+  - action: utter_anythingelse
+  - intent: affirm
+  - action: utter_ask_help
+  - intent: inform_sause
+
+- story: interactive_story_2
+  steps:
+  - intent: greet
+  - action: utter_ask_help
+  - intent: inform_order_pasta
+  - action: action_reset_all_slots
+  - action: order_pasta_form
+  - active_loop: order_pasta_form
+  - slot_was_set:
+    - requested_slot: pasta_type
+  - slot_was_set:
+    - pasta_type: white
+  - slot_was_set:
+    - requested_slot: pasta_bread
+  - slot_was_set:
+    - pasta_bread: garlic
+  - slot_was_set:
+    - requested_slot: pasta_chilli
+  - slot_was_set:
+    - pasta_chilli: spicy
+  - slot_was_set:
+    - requested_slot: pasta_extra_sause
+  - slot_was_set:
+    - pasta_extra_sause: false
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_pasta_details
+  - action: utter_order_confirm
+  - intent: deny
+  - slot_was_set:
+    - pasta_extra_sause: false
+  - action: utter_order_cancel
+  - action: action_reset_all_slots
+  - action: utter_anythingelse
+  - intent: deny
+  - slot_was_set:
+    - pasta_extra_sause: false
+  - action: utter_goodbye
+
+- story: interactive_story_3
+  steps:
+  - intent: greet
+  - action: utter_ask_help
+  - intent: place_order
+  - action: utter_place_order
+  - intent: inform_order_pasta
+  - action: action_reset_all_slots
+  - action: order_pasta_form
+  - active_loop: order_pasta_form
+  - slot_was_set:
+    - requested_slot: pasta_type
+  - slot_was_set:
+    - pasta_type: White
+  - slot_was_set:
+    - requested_slot: pasta_bread
+  - slot_was_set:
+    - pasta_bread: brown
+  - slot_was_set:
+    - requested_slot: pasta_chilli
+  - slot_was_set:
+    - pasta_chilli: spicy
+  - slot_was_set:
+    - requested_slot: pasta_extra_sause
+  - slot_was_set:
+    - pasta_extra_sause: true
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_pasta_details
+  - action: utter_order_confirm
+  - intent: affirm
+  - slot_was_set:
+    - pasta_extra_sause: true
+  - action: utter_confirm_thanks
+  - action: action_reset_all_slots
+  - action: utter_anythingelse
+  - intent: affirm
+  - slot_was_set:
+    - pasta_extra_sause: true
+  - action: utter_ask_help
+  - intent: inform_sause
+
+- story: interactive_story_4
+  steps:
+  - intent: greet
+  - action: utter_ask_help
+  - intent: place_order
+  - action: utter_place_order
+  - intent: inform_order_icecream
+  - action: order_icecream_form
+  - active_loop: order_icecream_form
+  - slot_was_set:
+    - requested_slot: cup_cone
+  - slot_was_set:
+    - cup_cone: cup
+  - slot_was_set:
+    - requested_slot: icecream_flavour
+  - slot_was_set:
+    - icecream_flavour: chocolate
+  - slot_was_set:
+    - requested_slot: icecream_scoop
+  - slot_was_set:
+    - icecream_scoop: single
+  - slot_was_set:
+    - requested_slot: icecream_topping
+  - slot_was_set:
+    - icecream_topping: chocochips
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_icecream_details
+  - action: utter_order_confirm
+  - intent: affirm
+  - slot_was_set:
+    - pasta_extra_sause: true
+  - action: utter_confirm_thanks
+  - action: action_reset_all_slots
+  - action: utter_anythingelse
+  - intent: affirm
+  - slot_was_set:
+    - pasta_extra_sause: true
+  - action: utter_ask_help
+  - intent: inform_icecream_scoop
+
+- story: interactive_story_5
+  steps:
+  - intent: greet
+  - action: utter_ask_help
+  - intent: place_order
+  - action: utter_place_order
+  - intent: inform_order_icecream
+  - action: order_icecream_form
+  - active_loop: order_icecream_form
+  - slot_was_set:
+    - requested_slot: cup_cone
+  - slot_was_set:
+    - cup_cone: cone
+  - slot_was_set:
+    - requested_slot: icecream_flavour
+  - slot_was_set:
+    - icecream_flavour: butterscotch
+  - slot_was_set:
+    - requested_slot: icecream_scoop
+  - slot_was_set:
+    - icecream_scoop: triple
+  - slot_was_set:
+    - requested_slot: icecream_topping
+  - slot_was_set:
+    - icecream_topping: oreo
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_icecream_details
+  - action: utter_order_confirm
+  - intent: deny
+  - slot_was_set:
+    - pasta_extra_sause: false
+  - action: utter_order_cancel
+  - action: action_reset_all_slots
+  - action: utter_anythingelse
+  - intent: deny
+  - slot_was_set:
+    - pasta_extra_sause: false
+  - action: utter_goodbye
+  - intent: inform_sause
+
+- story: interactive_story_6
+  steps:
+  - intent: greet
+  - action: utter_ask_help
+  - intent: inform_order_pizza
+  - action: order_pizza_form
+  - active_loop: order_pizza_form
+  - slot_was_set:
+    - requested_slot: pizza_size
+  - slot_was_set:
+    - pizza_size: regular
+  - slot_was_set:
+    - requested_slot: pizza_crust
+  - slot_was_set:
+    - pizza_crust: thin
+  - slot_was_set:
+    - requested_slot: pizza_topping
+  - slot_was_set:
+    - pizza_topping: chicken tikka
+  - slot_was_set:
+    - requested_slot: pizza_cheese
+  - slot_was_set:
+    - pizza_cheese: gauda
+  - slot_was_set:
+    - requested_slot: pizza_sause
+  - slot_was_set:
+    - pizza_sause: peri peri
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_pizza_details
+  - action: utter_order_confirm
+  - intent: affirm
+  - slot_was_set:
+    - pasta_extra_sause: true
+  - action: utter_confirm_thanks
+  - action: action_reset_all_slots
+  - action: utter_anythingelse
+  - intent: affirm
+  - slot_was_set:
+    - pasta_extra_sause: true
+  - action: utter_ask_help
+  - intent: inform_icecream_scoop

@@ -1,0 +1,65 @@
+version: "3.1"
+
+rules:
+
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: Say 'I am a bot' anytime the user challenges
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+
+- rule: Activate Form pizza
+  steps:
+  - intent: inform_order_pizza
+  - action: order_pizza_form
+  - active_loop: order_pizza_form
+
+- rule: Submit Form pizza
+  condition:
+  - active_loop: order_pizza_form
+  steps:
+  - action: order_pizza_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: utter_pizza_details
+  - action: utter_order_confirm
+
+- rule: Activate Form Pasta
+  steps:
+  - intent: inform_order_pasta
+  - action: action_reset_all_slots
+  - action: order_pasta_form
+  - active_loop: order_pasta_form
+
+- rule: Submit Form Pasta
+  condition:
+  - active_loop: order_pasta_form
+  steps:
+  - action: order_pasta_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: utter_pasta_details
+  - action: utter_order_confirm
+
+- rule: Activate Form Icecream
+  steps:
+  - intent: inform_order_icecream
+  - action: order_icecream_form
+  - active_loop: order_icecream_form
+
+- rule: Submit Form Icecream
+  condition:
+  - active_loop: order_icecream_form
+  steps:
+  - action: order_icecream_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: utter_icecream_details
+  - action: utter_order_confirm

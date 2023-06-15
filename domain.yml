@@ -1,0 +1,240 @@
+version: '3.1'
+intents:
+- affirm
+- bot_challenge
+- deny
+- goodbye
+- greet
+- inform_cheese
+- inform_crust
+- inform_icecream_cup_cone
+- inform_icecream_flavour
+- inform_icecream_scoop
+- inform_icecream_topping
+- inform_order_icecream
+- inform_order_pasta
+- inform_order_pizza
+- inform_pasta_bread
+- inform_pasta_chilli
+- inform_pasta_type
+- inform_sause
+- inform_size
+- inform_toppings
+- place_order
+entities:
+- pizza_cheese
+- pizza_size
+- pizza_topping
+- pizza_sause
+- pizza_crust
+- icecream_flavour
+- cup_cone
+- icecream_topping
+- icecream_scoop
+- pasta_chilli
+- pasta_bread
+- pasta_type
+slots:
+  pizza_size:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: pizza_size
+  pizza_crust:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: pizza_crust
+  pizza_topping:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: pizza_topping
+  pizza_cheese:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: pizza_cheese
+  pizza_sause:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: pizza_sause
+  pasta_type:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: pasta_type
+  pasta_bread:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: pasta_bread
+  pasta_chilli:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: pasta_chilli
+  pasta_extra_sause:
+    type: bool
+    mappings:
+    - type: from_intent
+      intent: affirm
+      value: true
+    - type: from_intent
+      intent: deny
+      value: false
+  cup_cone:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: cup_cone
+  icecream_flavour:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: icecream_flavour
+  icecream_scoop:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: icecream_scoop
+  icecream_topping:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: icecream_topping
+forms:
+  order_pizza_form:
+    required_slots:
+    - pizza_size
+    - pizza_crust
+    - pizza_topping
+    - pizza_cheese
+    - pizza_sause
+  order_pasta_form:
+    required_slots:
+    - pasta_type
+    - pasta_bread
+    - pasta_chilli
+    - pasta_extra_sause
+  order_icecream_form:
+    required_slots:
+    - cup_cone
+    - icecream_flavour
+    - icecream_scoop
+    - icecream_topping
+actions:
+- action_reset_all_slots
+- utter_anythingelse
+- utter_ask_help
+- utter_confirm_thanks
+- utter_goodbye
+- utter_icecream_details
+- utter_order_cancel
+- utter_order_confirm
+- utter_pasta_details
+- utter_pizza_details
+- utter_place_order
+responses:
+  utter_ask_help:
+  - text: How can i help you?
+  utter_goodbye:
+  - text: Bye
+  utter_iamabot:
+  - text: I am a bot, powered by Rasa.
+  utter_place_order:
+  - text: |-
+      Yes Sure
+
+      What you want to order?
+  utter_ask_pizza_size:
+  - text: |-
+      Mention your size please
+      We have Small/Regular, Medium and Large size pizza
+  utter_ask_pizza_crust:
+  - text: |-
+      Please mention your crust.
+      We have thin, stuffed and cheesey crust
+  utter_ask_pizza_topping:
+  - text: |-
+      What toppings would you like to have?
+      We have veggies, chicken sausage and chicken tikka
+  utter_ask_pizza_cheese:
+  - text: |-
+      What kind of cheese you want to add?
+      We have shredded, mozarella, gauda cheese
+  utter_ask_pizza_sause:
+  - text: |-
+      What kind of sause you want?
+      We have peri peri, pesto, hot sause
+  utter_pizza_details:
+  - text: |-
+      Thank you for your input, Let me repeat your order for you.
+
+      You have ordered a {pizza_size} size pizza with {pizza_crust} crust
+      and {pizza_topping} topping, {pizza_cheese} cheese and {pizza_sause} sause.
+  utter_order_confirm:
+  - text: Would you like to confirm your order?
+  utter_confirm_thanks:
+  - text: |-
+      Thank you for confirming your order.
+      We are now preparing your order.
+  utter_anythingelse:
+  - text: Anything else I can help you with?
+  utter_order_cancel:
+  - text: We have cancelled your order.
+  utter_ask_pasta_type:
+  - text: |-
+      What type of pasta would you like to have?
+      We have White, Red and Green pasta.
+  utter_ask_pasta_bread:
+  - text: |-
+      Which bread you like to be served with pasta?
+      We have Garlic, Brown and Wheat bread.
+  utter_ask_pasta_chilli:
+  - text: Do you like your pasta spicy or normal?
+  utter_ask_pasta_extra_sause:
+  - text: Do you want extra sause?
+  utter_pasta_details:
+  - condition:
+    - type: slot
+      name: pasta_extra_sause
+      value: true
+    text: |-
+      Thank you for your input. Let me repeat your order for you.
+
+      You have ordered a {pasta_chilli} {pasta_type} pasta with {pasta_bread} bread
+      and extra sause.
+  - condition:
+    - type: slot
+      name: pasta_extra_sause
+      value: false
+    text: |-
+      Thank you for your input. Let me repeat your order for you.
+
+      You have ordered a {pasta_chilli} {pasta_type} pasta with {pasta_bread} bread
+      and no extra sause.
+  utter_ask_cup_cone:
+  - text: Do you want your icecream in cup or cone?
+  utter_ask_icecream_flavour:
+  - text: |-
+      Which flavour of icecream you want?
+      We have chocolate, vanilla, butterscotch and strawberry icecream.
+  utter_ask_icecream_scoop:
+  - text: |-
+      How many scoop of icecream you want?
+      single, double or triple?
+  utter_ask_icecream_topping:
+  - text: |-
+      Which icecream topping you want?
+      We have chocochips, sprinkler and oreo topping.
+  utter_icecream_details:
+  - text: |-
+      Thank you for your input. Let me repeat your order for you.
+
+      You have ordered {icecream_scoop} scoop {icecream_flavour} icecream in {cup_cone}
+      with {icecream_topping} topping.
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
