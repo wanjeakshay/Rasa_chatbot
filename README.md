@@ -1,4 +1,4 @@
-# Rasa_chatbot
+# Rasa_chatbot to take an order at restaurant
 Create a chatbot to take order of pizza, icecream and pasta in restaurant
 ## Rasa Chatbot Templates
 
